@@ -1,0 +1,29 @@
+---
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/examples/echo_server/
+# this ingress will create ALB
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/
+# we need to create certificate (AWSCM)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: app1
+    # namespace: echoserver
+    annotations:
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:688567303455:certificate/a5c1711b-3c47-4f14-b446-04f5fba90c31
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+        alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+        alb.ingress.kubernetes.io/group.name: expense
+spec:
+    rules:
+    - host: "app1.basavadevops81s.online"
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: app1
+              port:
+                number: 80
