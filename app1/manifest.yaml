@@ -46,7 +46,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: echoserver
+    name: app1
     # namespace: echoserver
     annotations:
         alb.ingress.kubernetes.io/scheme: internet-facing
@@ -57,7 +57,7 @@ metadata:
         alb.ingress.kubernetes.io/group.name: expense
 spec:
     rules:
-    - host: "*app1.basavadevops81s.online"
+    - host: "app1.basavadevops81s.online"
       http:
         paths:
         - pathType: Prefix
