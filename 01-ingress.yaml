@@ -11,7 +11,7 @@ metadata:
     annotations:
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/target-type: ip
-        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:688567303455:certificate/a5c1711b-3c47-4f14-b446-04f5fba90c31
+        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:688567303455:certificate/744949fd-7df1-4dc2-9ba2-45fd85b46c1a
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
         alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
         alb.ingress.kubernetes.io/group.name: expense
@@ -24,6 +24,6 @@ spec:
           path: "/"
           backend:
             service:
-              name: app1
+              name: app1  #this will go created app1 service
               port:
                 number: 80
