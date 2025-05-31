@@ -1,0 +1,40 @@
+apiVersion: apps/v1     
+kind: Deployment       
+metadata:
+  name: app2           
+  labels:                
+    app: app2
+    tier: frontend
+spec:
+  replicas: 1            #Create 3 identical Pods.
+  selector:              #these are used to select the pod to create replicas (This tells ReplicaSet:"Look for pods that have these labels."If a pod matches, it's part of the ReplicaSet.)
+    matchLabels:
+      app: app2
+      tier: frontend                      
+  template:              #this is pod template(or)pod defination (Pod Template — What kind of pod should be created)
+    metadata:
+      labels:            #this lables belong to pod (Any new pods created by this ReplicaSet will have these labels.)
+        app: app2
+        tier: frontend
+    spec:
+      containers:
+      - name: app2
+        image: basavaraj0509/app2:v1
+---
+---
+#clusterip service
+kind: Service
+apiVersion: v1 
+
+metadata: 
+  name: app2
+
+spec: 
+  selector:
+    app: app2
+    tier: frontend
+  ports: 
+  - name: nginx-service-port 
+    protocol: TCP
+    port: 80 #this is service port 
+    targetPort: 80  #this is container port here you can use names of the ports aswell example: http-web-svc
